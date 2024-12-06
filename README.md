@@ -83,22 +83,6 @@ You need to have **Rust** installed on your machine. If you don't have it yet, i
 
 ---
 
-## Contribution 🤝
-
-This project is designed as a challenge, and contributions are welcome! Here are a few ways you can contribute:
-1. Add features to improve the simulation (e.g., ant movement logic, pheromone trails).
-2. Optimize the existing code for performance and readability.
-3. Suggest new ideas to make the simulation more realistic or engaging.
-
-To contribute, feel free to open an **issue** or submit a **pull request**.
-
----
-
-## License 📜
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute it as you like.
-
----
 
 ## Notes 📝
 
