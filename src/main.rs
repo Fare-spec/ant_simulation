@@ -1,3 +1,5 @@
+use std::vec;
+
 #[derive(Debug, Clone, Copy, PartialEq)]
 
 enum Cell {
@@ -7,8 +9,10 @@ enum Cell {
     Ant,
 }
 fn main() {
-    let test = create_grid(13);
+    let mut test: Vec<Vec<Cell>> = create_grid(13);
+    test = modify_cell(1, 1, Cell::Nest, test);
     display_grid(&test);
+
 }
 
 fn create_grid(size: usize) -> Vec<Vec<Cell>> {
@@ -29,4 +33,7 @@ fn display_grid(grid: &Vec<Vec<Cell>>) {
         println!();
     }
 }
-//fn modify_cell(x: u32, y: u32,)
+fn modify_cell(x: u32, y: u32,value_cell: Cell, mut grid: Vec<Vec<Cell>> )->Vec<Vec<Cell>>{
+    grid[y as usize][x as usize] = value_cell;
+    grid
+}
