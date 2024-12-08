@@ -78,7 +78,12 @@ fn find_thing(thing: Cell, grid: &Vec<Vec<Cell>>)-> Vec<Vec<u32>>{
     things
 }
 
-fn find_nearest_fing(x: u32,y: u32, grid: &Vec<Vec<Cell>>, thing: Cell)->Vec<u32>{
+fn find_nearest_thing(x: u32, y: u32, grid: &Vec<Vec<Cell>>, thing: Cell) -> u32 {
+    let mut distances: Vec<u32> = Vec::new();
     let things = find_thing(thing, grid);
-    //TODO
+    for i in things {
+        let dist = ((i[1] as i64 - x as i64).abs() + (i[0] as i64 - y as i64).abs()); // distance de manhattan
+        distances.push(dist as u32);
+    }
+    *distances.iter().min().unwrap_or(&0)
 }
