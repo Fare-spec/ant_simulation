@@ -14,9 +14,12 @@ fn main() {
     let size: u32 = 13;
     let mut test: Vec<Vec<Cell>> = create_grid(size);
     test = modify_cell(12, 12, Cell::Nest, test);
-    test = put_random_food(test, size);
+    for i in 1..50{
+        test = put_random_thing(test, size, Cell::Food); //food
+    }
     display_grid(&test);
-
+    let a =find_thing(Cell::Food, &test);
+    print!("{:?}",a);
 }
 
 fn create_grid(size: u32) -> Vec<Vec<Cell>> {
@@ -31,7 +34,7 @@ fn display_grid(grid: &Vec<Vec<Cell>>) {
     for row in grid {
         for celle in row {
             let symbol = match celle {
-                Cell::Empty => '.',
+                Cell::Empty => '-',
                 Cell::Ant => 'A',
                 Cell::Nest => 'N',
                 Cell::Food => 'F',
@@ -46,14 +49,14 @@ fn modify_cell(x: u32, y: u32,value_cell: Cell, mut grid: Vec<Vec<Cell>> )->Vec<
     grid
 }
 
-fn put_random_food(mut grid: Vec<Vec<Cell>>, size: u32)->Vec<Vec<Cell>>{
+fn put_random_thing(mut grid: Vec<Vec<Cell>>, size: u32, thingcell: Cell)->Vec<Vec<Cell>>{
     let mut i: u16 = 0;
     loop{
         
         let x = rand::thread_rng().gen_range(0..size);
         let y = rand::thread_rng().gen_range(0..size);
         if get_cell(&grid, x, y) == Cell::Empty{
-            grid[y as usize][x as usize] = Cell::Food;
+            grid[y as usize][x as usize] = thingcell;
             return grid;
         }
         i+=1;
@@ -61,4 +64,21 @@ fn put_random_food(mut grid: Vec<Vec<Cell>>, size: u32)->Vec<Vec<Cell>>{
             return grid;
         }
     }
+}
+
+fn find_thing(thing: Cell, grid: &Vec<Vec<Cell>>)-> Vec<Vec<u32>>{
+    let mut things: Vec<Vec<u32>> = Vec::new();
+    for i in 0..grid.len(){
+        for j in 0..grid.len(){
+            if grid[i][j] == thing{
+                things.push(vec![i as u32, j as u32]);
+            }
+        }
+    }
+    things
+}
+
+fn find_nearest_fing(x: u32,y: u32, grid: &Vec<Vec<Cell>>, thing: Cell)->Vec<u32>{
+    let things = find_thing(thing, grid);
+    //TODO
 }
